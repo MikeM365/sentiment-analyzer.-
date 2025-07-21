@@ -71,5 +71,6 @@ Expected Output:
 Predicted Sentiment: Positive
 
 Dependencies
+
 Python 3
 scikit-learn
