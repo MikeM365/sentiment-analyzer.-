@@ -61,3 +61,15 @@ To run the analyzer, execute the main script from your terminal, passing the tex
 **Syntax:**
 ```bash
 python sentiment_analyzer.py "Your text to analyze here"
+
+Example:
+
+python sentiment_analyzer.py "This movie was fantastic and I really enjoyed the acting."
+
+Expected Output:
+
+Predicted Sentiment: Positive
+
+Dependencies
+Python 3
+scikit-learn
