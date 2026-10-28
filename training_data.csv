@@ -1,7 +1,7 @@
 text,sentiment
 I love this product!,positive
 This is the worst experience ever.,negative
-The movie was okay, not great but not bad.,neutral
+"The movie was okay, not great but not bad.",neutral
 I am so happy with the service.,positive
 I am very disappointed with the quality.,negative
 The weather is pleasant today.,neutral
