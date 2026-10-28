@@ -1,20 +1,23 @@
 # Sentiment Analyzer
 
-A command-line tool built in Python to classify a given piece of text as having 'Positive' or 'Negative' sentiment. This project uses the `scikit-learn` library to train a simple machine learning model for natural language processing (NLP).
+A command-line tool built in Python to classify a piece of text as having 'positive', 'negative', or 'neutral' sentiment. This project uses the `scikit-learn` library to train a simple machine learning model for natural language processing (NLP).
 
 ## Features
 
--   Analyzes input text provided via the command line.
--   Outputs a clear prediction: 'Positive' or 'Negative'.
--   Uses a simple and effective machine learning pipeline.
+-   Trains on a labeled dataset (`training_data.csv`) of example sentences.
+-   Reports the trained model's accuracy and a per-class precision/recall breakdown on a held-out test split.
+-   Interactively analyzes any sentence you type in and predicts its sentiment.
 
 ## How It Works
 
 The script performs the following steps:
-1.  **Loads a pre-defined dataset** of text samples labeled with their sentiment.
+1.  **Loads the training dataset** (`training_data.csv`) using `pandas` — a set of text samples labeled 'positive', 'negative', or 'neutral'.
 2.  **Vectorizes the text data:** It converts the text into numerical features using `CountVectorizer`, which creates a matrix of token counts.
-3.  **Trains a Classifier:** A `Multinomial Naive Bayes` classifier, which is well-suited for text classification tasks, is trained on the vectorized data.
-4.  **Makes a Prediction:** When you provide a new sentence, the script transforms it using the same vectorizer and feeds it to the trained model to predict the sentiment.
+3.  **Trains a Classifier:** A `Multinomial Naive Bayes` classifier, which is well-suited for text classification tasks, is trained on a split of the vectorized data.
+4.  **Evaluates the model:** The remaining held-out data is used to report accuracy and a classification report (precision/recall/F1 per class).
+5.  **Makes Predictions:** For each sentence you type in, the script transforms it using the same vectorizer and feeds it to the trained model to predict the sentiment.
+
+**Note on accuracy:** `training_data.csv` only has 19 example sentences, so this is a small, educational demonstration of the pipeline rather than a production-grade classifier — accuracy on the test split will vary a lot run to run and won't be high. Predictions are most reliable for sentences that share vocabulary with the training examples. Adding more labeled examples to `training_data.csv` is the easiest way to improve it.
 
 ## Installation
 
@@ -28,13 +31,12 @@ To get this project running on your local machine, follow these steps.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/sentiment-analyzer.git
+    git clone https://github.com/MikeM365/sentiment-analyzer.-
     ```
-    *(Note: Replace `YOUR_USERNAME` with your actual GitHub username.)*
 
 2.  **Navigate to the project directory:**
     ```bash
-    cd sentiment-analyzer
+    cd sentiment-analyzer.-
     ```
 
 3.  **Create and activate a virtual environment:**
@@ -56,21 +58,34 @@ To get this project running on your local machine, follow these steps.
 
 ## Usage
 
-To run the analyzer, execute the main script from your terminal, passing the text you want to analyze as an argument in quotes.
+Run the script from your terminal. It will train, print an accuracy report, then prompt you for sentences to analyze. Type `quit` to exit.
 
-**Syntax:**
 ```bash
-python sentiment_analyzer.py "Your text to analyze here"
+python sentiment_analyzer.py
+```
 
-Example:
+**Example session:**
+```
+Model accuracy on test set: 75%
 
-python sentiment_analyzer.py "This movie was fantastic and I really enjoyed the acting."
+Classification report:
+              precision    recall  f1-score   support
+    negative       1.00      1.00      1.00         2
+     neutral       1.00      1.00      1.00         1
+    positive       0.00      0.00      0.00         1
+...
 
-Expected Output:
+Type 'quit' to exit
 
-Predicted Sentiment: Positive
+Enter a sentence to analyze: This is amazing and wonderful!
+Sentiment: positive
+Enter a sentence to analyze: quit
+```
 
-Dependencies
+(Exact accuracy numbers will vary between runs since the test split is small.)
 
-Python 3
-scikit-learn
+## Dependencies
+
+-   Python 3
+-   pandas
+-   scikit-learn
